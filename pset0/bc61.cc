@@ -1,10 +1,11 @@
+#include <cstdint>
 #include <cstdio>
 
 int main() {
-  int bytes = 0;
+  uint32_t bytes = 0;
   while (fgetc(stdin) != EOF) {
     bytes++;
   }
 
-  fprintf(stdout, "\t%d\n", bytes);
+  fprintf(stdout, "\t%u\n", bytes);
 }
