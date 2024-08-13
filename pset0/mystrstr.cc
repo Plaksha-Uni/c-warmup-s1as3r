@@ -3,21 +3,23 @@
 #include <cstdio>
 #include <cstring>
 
-size_t mystrlen(const char* s) {
+size_t mystrlen(const char *s) {
   size_t len = 0;
-  while (s[len] != '\0') {
+  while (*(s + len) != '\0') {
     len++;
   }
   return len;
 }
 
-bool strcmp_upto(const char* s1, const char* s2, size_t len) {
+bool strcmp_upto(const char *s1, const char *s2, size_t len) {
   if (mystrlen(s1) < len) {
     return false;
   }
 
-  for (size_t i = 0; i < len; i++) {
-    if (s1[i] != s2[i]) {
+  size_t count = 0;
+  for (char *c1 = (char *)s1, *c2 = (char *)s2; count < len;
+       count++, c1++, c2++) {
+    if (*c1 != *c2) {
       return false;
     }
   }
@@ -31,9 +33,9 @@ char *mystrstr(const char *s1, const char *s2) {
     return (char *)s1;
   }
 
-  for (size_t i = 0; s1[i] != '\0'; i++) {
-    if (s1[i] == s2[0] && strcmp_upto(&s1[i], s2, len)) {
-        return (char *)&s1[i];
+  for (char *c = (char *)s1; *c != '\0'; c++) {
+    if (*c == *s2 && strcmp_upto(c, s2, len)) {
+      return c;
     }
   }
   return nullptr;
