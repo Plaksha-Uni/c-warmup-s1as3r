@@ -10,15 +10,11 @@ int main() {
 
   bool last_was_space = true;
   bool curr_is_space = false;
-  bool last_was_newline = false;
 
   char c;
   while (true) {
     c = fgetc(stdin);
     if (c == EOF) {
-      if (!last_was_newline && bytes > 0) {
-        lines++;
-      }
       break;
     }
 
@@ -30,8 +26,7 @@ int main() {
     }
     last_was_space = curr_is_space;
 
-    last_was_newline = c == '\n';
-    if (last_was_newline) {
+    if (c == '\n') {
       lines++;
     }
   }
